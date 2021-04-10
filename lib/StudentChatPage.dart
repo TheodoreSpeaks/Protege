@@ -68,6 +68,7 @@ class _ChatPageState extends State<ChatPage> {
     super.initState();
     _messageController = TextEditingController();
     _oldTextValue = '';
+    Conversation.initAI();
     convo =
         new Conversation(["here is the teacher prompt"], this.messageCallback);
     messages = convo.getConvo();
