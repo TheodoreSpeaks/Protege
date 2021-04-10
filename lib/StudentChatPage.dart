@@ -56,19 +56,29 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  TextEditingController _message_controller;
-  String old_value;
+  TextEditingController _messageController;
+  String _oldTextValue;
+
+  List<String> messages = [
+    "So tell me about induction!",
+    "What do you know about induction?",
+    "I don't know much, what is its definition?",
+    "Induction starts with three steps",
+    "What are those three steps",
+    "I don't know",
+    "me either"
+  ];
 
   @override
   void initState() {
     super.initState();
-    _message_controller = TextEditingController();
-    old_value = '';
+    _messageController = TextEditingController();
+    _oldTextValue = '';
   }
 
   @override
   void dispose() {
-    _message_controller.dispose();
+    _messageController.dispose();
     super.dispose();
   }
 
@@ -77,29 +87,13 @@ class _ChatPageState extends State<ChatPage> {
     return Column(
       children: [
         Expanded(
-          child: ListView(
-            children: [
-              ChatBubble(
-                  text:
-                      'hello well learn about induction today. What do you know about induction?'),
-              ChatBubble(
-                  text: 'I dont know much, what is induction?', isUser: false),
-              ChatBubble(text: 'Induction starts with three steps'),
-              ChatBubble(text: 'ok', isUser: false),
-              ChatBubble(text: 'Induction starts with three steps'),
-              ChatBubble(text: 'ok', isUser: false),
-              ChatBubble(text: 'Induction starts with three steps'),
-              ChatBubble(text: 'ok', isUser: false),
-              ChatBubble(text: 'Induction starts with three steps'),
-              ChatBubble(text: 'ok', isUser: false),
-              ChatBubble(text: 'Induction starts with three steps'),
-              ChatBubble(text: 'ok', isUser: false),
-              SizedBox(
-                height: 18,
-              ),
-            ],
+            child: ListView.builder(
+          itemBuilder: (context, index) => ChatBubble(
+            text: messages[index],
+            isUser: index % 2 == 1,
           ),
-        ),
+          itemCount: messages.length,
+        )),
         Row(
           children: [
             IconButton(icon: Icon(Icons.mic), onPressed: () {}),
@@ -110,34 +104,38 @@ class _ChatPageState extends State<ChatPage> {
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all()),
                 child: TextField(
-                  controller: _message_controller,
+                  controller: _messageController,
                   onChanged: (str) {
                     // SO JANK DOESNT DELETE PROPERLY
                     final val = TextSelection.collapsed(
-                        offset: _message_controller.text.length);
-                    _message_controller.selection = val;
+                        offset: _messageController.text.length);
+                    _messageController.selection = val;
 
                     String fixed_text;
-                    print('old value $old_value, new value $str');
-                    if (str.length > old_value.length) {
+                    if (str.length > _oldTextValue.length) {
                       // Add new text
                       fixed_text =
                           (str.length != 0) ? str.substring(1) + str[0] : '';
                     } else {
-                      fixed_text = old_value.substring(0, old_value.length - 1);
+                      fixed_text =
+                          _oldTextValue.substring(0, _oldTextValue.length - 1);
                     }
 
-                    _message_controller.value = TextEditingValue(
+                    _messageController.value = TextEditingValue(
                       text: fixed_text,
                       selection: TextSelection.collapsed(offset: str.length),
                     );
 
-                    old_value = fixed_text;
+                    _oldTextValue = fixed_text;
                   },
                   onSubmitted: (str) {
                     // TODO: submit to chat
-                    _message_controller.clear();
-                    old_value = '';
+                    _messageController.clear();
+                    _oldTextValue = '';
+
+                    setState(() {
+                      messages.add(str);
+                    });
                   },
                   decoration: InputDecoration(
                     hintText: 'Type message',
