@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'OpenAPI.dart';
+import 'Converstation.dart';
 
 class StudentChatPage extends StatelessWidget {
   @override
@@ -68,6 +68,7 @@ class _ChatPageState extends State<ChatPage> {
     super.initState();
     _messageController = TextEditingController();
     _oldTextValue = '';
+    Conversation.initAI();
     convo =
         new Conversation(["here is the teacher prompt"], this.messageCallback);
     messages = convo.getConvo();
