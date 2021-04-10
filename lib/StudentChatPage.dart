@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'OpenAPI.dart';
 
 class StudentChatPage extends StatelessWidget {
   @override
@@ -58,28 +59,30 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   late TextEditingController _messageController;
   late String _oldTextValue;
+  late Conversation convo;
 
-  List<String> messages = [
-    "So tell me about induction!",
-    "What do you know about induction?",
-    "I don't know much, what is its definition?",
-    "Induction starts with three steps",
-    "What are those three steps",
-    "I don't know",
-    "me either"
-  ];
+  late List<String> messages;
 
   @override
   void initState() {
     super.initState();
     _messageController = TextEditingController();
     _oldTextValue = '';
+    convo =
+        new Conversation(["here is the teacher prompt"], this.messageCallback);
+    messages = convo.getConvo();
   }
 
   @override
   void dispose() {
     _messageController.dispose();
     super.dispose();
+  }
+
+  void messageCallback(convo) {
+    setState(() {
+      messages = convo;
+    });
   }
 
   @override
@@ -133,9 +136,7 @@ class _ChatPageState extends State<ChatPage> {
                     _messageController.clear();
                     _oldTextValue = '';
 
-                    setState(() {
-                      messages.add(str);
-                    });
+                    convo.updateConversation(str);
                   },
                   decoration: InputDecoration(
                     hintText: 'Type message',

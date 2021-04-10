@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:protege/OpenAPI.dart';
 import 'package:protege/StudentChatPage.dart';
 
 class StudentPage extends StatelessWidget {
@@ -9,10 +8,6 @@ class StudentPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Protégé'),
       ),
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.api),
-          onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => OpenAPITestScreen()))),
       body: Row(
         children: [
           Expanded(

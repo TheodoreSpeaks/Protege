@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-//import 'package:gpt_3_dart/gpt_3_dart.dart';
 
 Future<String> getCompletion(currentPrompt) async {
-  var completion = await fakeAPI();
+  var completion = await fakeAPI(currentPrompt);
   return completion;
 }
 
-Future<String> fakeAPI() => Future.delayed(
+Future<String> fakeAPI(currentPrompt) => Future.delayed(
       Duration(seconds: 2),
-      () => 'completion',
+      () => 'completed: ' + currentPrompt,
     );
 
 // String getConversation() {
@@ -19,48 +18,33 @@ Future<String> fakeAPI() => Future.delayed(
 
 class Conversation {
   late List<String> convo;
+  late Function stateCallback;
   // static OpenAI openAI;
+
+  List<String> getConvo() {
+    return convo;
+  }
 
   static void initAI() {
     //    openAI = new OpenAI(apiKey: "mykey");
   }
-  Conversation() {
-    convo = ["prompt"];
-  }
+  Conversation(this.convo, this.stateCallback);
 
   String getFullPrompt() {
-    return convo.join("");
+    return convo.join("\n");
+  }
+
+  Future<String> getCompletion() async {
+    var completion = await fakeAPI(this.getFullPrompt());
+    return completion;
   }
 
   void updateConversation(String studentInput) async {
     convo.add(studentInput);
-    String completion = await getCompletion(studentInput);
+    stateCallback(convo);
+    String completion = await this.getCompletion();
     //openAI.complete(prompt.last);
     convo.add(completion);
-  }
-}
-
-class OpenAPITestScreen extends StatefulWidget {
-  OpenAPITestScreen() : super();
-
-  @override
-  _OpenAPITestScreen createState() => _OpenAPITestScreen();
-}
-
-class _OpenAPITestScreen extends State<OpenAPITestScreen> {
-  late Conversation convo;
-
-  @override
-  void initState() {
-    super.initState();
-    convo = new Conversation();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Container(child: Text(convo.getFullPrompt())),
-    );
+    stateCallback(convo);
   }
 }
