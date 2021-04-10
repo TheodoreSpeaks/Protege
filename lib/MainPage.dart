@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:protege/StudentChatPage.dart';
 
+import 'GroupScreen.dart';
+
 class MainPage extends StatefulWidget {
   @override
   _MainPageState createState() => _MainPageState();
@@ -67,6 +69,7 @@ class _MainPageState extends State<MainPage> {
         ],
       ),
       body: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             flex: 1,
@@ -146,7 +149,8 @@ class TeacherAssignmentPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () => Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => GroupScreen())),
       child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
