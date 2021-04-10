@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:http/http.dart' as http;
-import 'package:gpt_3_dart/gpt_3_dart.dart';
+import 'OpenAI.dart';
 import 'key.dart';
 
 /*
@@ -21,7 +21,7 @@ class Conversation {
   late Function stateCallback;
   static late OpenAI openAI;
   static String setup =
-      "This is a conversation between an AI and a Human.  The AI is learning from the Human.  The AI is curious, sarcastic, and smart\n";
+      "This following is a conversation between an AI student and a Human.  The AI is a studend learning from the Human.  The AI is curious, enthusiastic, polite, and smart\n";
 
   List<String> getConvo() {
     return convo;

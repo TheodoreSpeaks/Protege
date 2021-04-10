@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'OpenAPI.dart';
+import 'Converstation.dart';
 
 class StudentChatPage extends StatelessWidget {
   @override
