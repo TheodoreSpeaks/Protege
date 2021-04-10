@@ -56,8 +56,8 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  TextEditingController _messageController;
-  String _oldTextValue;
+  late TextEditingController _messageController;
+  late String _oldTextValue;
 
   List<String> messages = [
     "So tell me about induction!",
@@ -105,29 +105,29 @@ class _ChatPageState extends State<ChatPage> {
                     border: Border.all()),
                 child: TextField(
                   controller: _messageController,
-                  onChanged: (str) {
-                    // SO JANK DOESNT DELETE PROPERLY
-                    final val = TextSelection.collapsed(
-                        offset: _messageController.text.length);
-                    _messageController.selection = val;
+                  // onChanged: (str) {
+                  //   // SO JANK DOESNT DELETE PROPERLY
+                  //   final val = TextSelection.collapsed(
+                  //       offset: _messageController.text.length);
+                  //   _messageController.selection = val;
 
-                    String fixed_text;
-                    if (str.length > _oldTextValue.length) {
-                      // Add new text
-                      fixed_text =
-                          (str.length != 0) ? str.substring(1) + str[0] : '';
-                    } else {
-                      fixed_text =
-                          _oldTextValue.substring(0, _oldTextValue.length - 1);
-                    }
+                  //   String fixed_text;
+                  //   if (str.length > _oldTextValue.length) {
+                  //     // Add new text
+                  //     fixed_text =
+                  //         (str.length != 0) ? str.substring(1) + str[0] : '';
+                  //   } else {
+                  //     fixed_text =
+                  //         _oldTextValue.substring(0, _oldTextValue.length - 1);
+                  //   }
 
-                    _messageController.value = TextEditingValue(
-                      text: fixed_text,
-                      selection: TextSelection.collapsed(offset: str.length),
-                    );
+                  //   _messageController.value = TextEditingValue(
+                  //     text: fixed_text,
+                  //     selection: TextSelection.collapsed(offset: str.length),
+                  //   );
 
-                    _oldTextValue = fixed_text;
-                  },
+                  //   _oldTextValue = fixed_text;
+                  // },
                   onSubmitted: (str) {
                     // TODO: submit to chat
                     _messageController.clear();
@@ -161,7 +161,7 @@ class _ChatPageState extends State<ChatPage> {
 class ChatBubble extends StatelessWidget {
   final String text;
   final bool isUser;
-  const ChatBubble({Key key, this.text, this.isUser = true}) : super(key: key);
+  const ChatBubble({required this.text, this.isUser = true}) : super();
 
   @override
   Widget build(BuildContext context) {

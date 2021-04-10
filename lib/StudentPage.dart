@@ -61,10 +61,6 @@ class StudentPage extends StatelessWidget {
 }
 
 class AssignmentPreview extends StatelessWidget {
-  const AssignmentPreview({
-    Key key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -99,10 +95,6 @@ class AssignmentPreview extends StatelessWidget {
 }
 
 class ClassSelector extends StatelessWidget {
-  const ClassSelector({
-    Key key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(
