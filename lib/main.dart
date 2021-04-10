@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'StudentPage.dart';
+import 'MainPage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
