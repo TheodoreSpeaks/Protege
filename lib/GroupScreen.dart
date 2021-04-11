@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'SummarizationCard.dart';
+
 class GroupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -49,15 +51,15 @@ class GroupView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scrollbar(
-      child: Container(
-          width: 350,
-          decoration: BoxDecoration(
-              color: Colors.grey[300],
-              borderRadius: BorderRadius.circular(8.0)),
-          padding: const EdgeInsets.all(16.0),
-          margin: const EdgeInsets.only(right: 16.0),
-          child: Column(
+    return Container(
+        width: 350,
+        decoration: BoxDecoration(
+            color: Colors.grey[300],
+            borderRadius: BorderRadius.circular(8.0)),
+        padding: const EdgeInsets.all(16.0),
+        margin: const EdgeInsets.only(right: 16.0),
+        child: Scrollbar(
+                  child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('Group 1',
@@ -76,41 +78,7 @@ class GroupView extends StatelessWidget {
                 ),
               ),
             ],
-          )),
-    );
-  }
-}
-
-class SummarizationCard extends StatelessWidget {
-  const SummarizationCard({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16.0),
-      margin: const EdgeInsets.only(bottom: 8.0),
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(8.0)),
-      child: Column(
-        children: [
-          Text(
-              'Induction is blah blah blah blah blah lorem ipsum you know the drill by now',
-              style: TextStyle(fontSize: 18)),
-          SizedBox(height: 16),
-          Row(
-            children: [
-              CircleAvatar(
-                backgroundColor: Colors.blue,
-              ),
-              SizedBox(width: 8),
-              Text('Chuck Miller'),
-            ],
-          )
-        ],
-      ),
-    );
+          ),
+        ));
   }
 }
