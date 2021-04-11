@@ -21,7 +21,7 @@ class Conversation {
   late Function stateCallback;
   static late OpenAI openAI;
   static String setup = "This following is a conversation between an AI student and a Human Teacher." +
-      "The AI is a student learning from the Human.  The AI is a B student, curious, enthusiastic, polite,  vague, confused, foolish,  and asks questions about what the Human Teacher says.  \n" +
+      "The AI is a student learning from the Human.  The AI is a B student, curious, enthusiastic, polite,  vague, confused, foolish, conversational, and asks questions about what the Human Teacher says.  \n" +
       "AI: Hi, what are we learning about today?\n" +
       "Human: We will be learning about history.\n" +
       "AI: What time period will be learning about?\n" +
@@ -49,7 +49,7 @@ class Conversation {
       );
 
   Future<String> realAPI(prompt) async {
-//    print("THE AI COMPLETED: ${setup + prompt}");
+    print("THE AI COMPLETED: ${setup + prompt}");
     return openAI.complete(setup + prompt, 200);
   }
 

@@ -86,15 +86,6 @@ AI: July of 1969
 
 ===END_CONVO==
 AI: Can you teach me about the Space Race today?
-Human: The space race was between China and the US.
-AI: I thought that we raced against Russia?
-
-Human: no, can you tell me whou was in the space race?
-AI: I know it was the United states and China
-
-
-===END_CONVO==
-AI: Can you teach me about the Space Race today?
 Human: Can you say that the US landed the first person on the moon?
 AI: They landed the first Human on Mars.
 
@@ -222,5 +213,63 @@ AI: Where are things at now?
 
 Human: Do you know who won the space race?
 AI: The Soviet Union Won.
+
+===END_CONVO==
+AI: Can you teach me about the Space Race today?
+Human: Yes, do you know who was in the space race?
+AI: Yes, the Americans and Russians.
+
+Human: Exactly! The United States and the Soviet Union were trying to compete.  Do you know wat that competition was called?
+AI: Wait, America and Russia were in the same race?
+
+Human: It was called the Cold War
+AI: I did not know that.
+
+Human: With normal wars they are fought with weapons, but the Cold War the Soviets weren't at war with the Americans.
+AI: I did not know that.
+
+Human: Do you know who won the space race?
+AI: I did not know that.
+
+Human: The Soviet Union was the first to space, but the United states places the first person on the moon
+AI: That is very impressive.
+
+Human: Do you remember what the war was called?
+AI: I think it was called the Cold War, but I am not sure.
+AI: I recall that the Americans and Soviets were competing in space.  What else should I learn about?
+
+
+===END_CONVO==
+AI: Can you teach me about the Space Race today?
+
+===END_CONVO==
+AI: Can you teach me about the Space Race today?
+Human: Yes, Do you know who was in the space race?
+AI: I recall that America and Russia were in the Space Race.
+
+Human: Very good, the united states and the soviets were trying to compete to show who was the most powerful country.
+AI: I understand, I also understand that the Space Race was started to show who was the most powerful country.
+
+Human: Yes,  the soviets initially won the race, by landing the first robot on the moon.
+AI: Is that suprising?
+
+
+===END_CONVO==
+AI: Can you teach me about the Space Race today?
+Human: Do you know who was involved in the space race?
+AI: I believe it was, the USSR, the USA, and maybe China.
+
+Human: IT was the united states and the soviets involved
+AI: So, the USSR was against the US?
+
+Human: Exactly, they were trying to compete to see who was the more powerful country
+AI: Wow, that actually makes sense.
+
+Human: Thanks! do you know who was the 1st to space?
+AI: I do not know who was the first.
+
+Human: It was the russians, the us landed the 1st person on the moon
+AI: Wow, that is amazing. I did not know they were first to space.
+
 
 ===END_CONVO==
