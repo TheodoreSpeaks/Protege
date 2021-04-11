@@ -21,7 +21,7 @@ class Conversation {
   late Function stateCallback;
   static late OpenAI openAI;
   static String setup =
-      "This following is a conversation between an AI student and a Human.  The AI is a studend learning from the Human.  The AI is curious, enthusiastic, polite, and smart\n";
+      "This following is a conversation between an AI student and a Human.  The AI is a student learning from the Human.  The AI is curious, enthusiastic, polite, and smart\n";
 
   List<String> getConvo() {
     return convo;
@@ -64,7 +64,7 @@ class Conversation {
         "My second grader asked me what this passage means:\n \"\"\"\"\n";
 
     var postfix =
-        "\n \"\"\"\"\n I rephrased it for him, in plain language a second grader can understand:\n";
+        "\n \"\"\"\"\n I rephrased it for him, in plain language a second grader can understand:\n\"\"\"\"";
     var summary = await this.realAPI(prefix + this.getFullPrompt() + postfix);
     return summary;
   }
