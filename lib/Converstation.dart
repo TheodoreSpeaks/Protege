@@ -21,7 +21,22 @@ class Conversation {
   late Function stateCallback;
   static late OpenAI openAI;
   static String setup =
-      "This following is a conversation between an AI student and a Human.  The AI is a student learning from the Human.  The AI is curious, enthusiastic, polite, and smart\n";
+      "This following is a conversation between an AI student and a Human Teacher.  The AI is a student learning from the Human.  The AI is a B student, curious, enthusiastic, polite,  vague, confused, foolish,  and asks questions about what the Human Teacher says.  \n" +
+          "AI: Hi, what are we learning about today?\n" +
+          "Human: We will be learning about history.\n" +
+          "AI: What time period will be learning about?\n" +
+          "Human: We will learn about World War One.  Do you know when WWI started?\n" +
+          "AI: My knowledge is it started in the 1900's, is that correct?\n" +
+          "Human: Correct, it started in 1914.  What was the political environment in Europe like at the time?\n" +
+          "AI: I recall that Germany was gaining power.\n" +
+          "Human: Yes, what actually started the war?\n" +
+          "AI: I read that to start the war, Germany declared war on France.\n" +
+          "Human: That is partially correct.\n" +
+          "AI: So, it was the German's fault?\n" +
+          "Human: Not entirely, they had an alliance with Austria that pulled them into it.  Does that make sense?\n" +
+          "AI: Yes, I understand.\n" +
+          "Human: Okay, can you tell me what you have learned?\n" +
+          "AI: I learned that Germany started the war, and I learned that it was not entirely their fault.\n";
 
   List<String> getConvo() {
     return convo;
@@ -33,7 +48,8 @@ class Conversation {
       );
 
   Future<String> realAPI(prompt) async {
-    return openAI.complete(prompt, 200);
+    print("THE AI COMPLETED: ${setup + prompt}");
+    return openAI.complete(setup + prompt, 200);
   }
 
   static void initAI() {
@@ -48,13 +64,16 @@ class Conversation {
       var prefix = (i % 2 == 0) ? "" : "Human: ";
       prompt += prefix + this.convo[i] + "\n";
     }
-    return setup + prompt;
+    return prompt;
   }
 
   Future<String> getCompletion() async {
     //print("Full prompt: \n");
     //print(getFullPrompt());
-    var completion = await this.realAPI(this.getFullPrompt());
+    var completion = "";
+    while (completion == "") {
+      completion = await this.realAPI(this.getFullPrompt());
+    }
     //print("Summary: " + await getSummary());
     return completion; // + "\n\nSUMMARY:\n" + await gtetSummary();
   }

@@ -135,3 +135,24 @@ Human: Hello, who are you?
 AI: I am an AI created by OpenAI. How can I help you today?
 Human: 
 ===END_CONVO==
+new_convo
+===END_CONVO==
+new_convo
+===END_CONVO==
+AI: Can you teach me about the Space Race today?
+Human: The space race was with the ussr and the us
+
+Human: Do you know anything about the USSR?
+AI: I recall that the USSR was run by a man named Joseph Stalin.
+
+
+===END_CONVO==
+AI: Can you teach me about the Space Race today?
+Human: The space race was a race to space
+AI: What compete to space?
+
+Human: The U.S and the USSR were both trying to intimdate each other by making it to space first.
+AI: What were the take away points from the speech?
+
+
+===END_CONVO==

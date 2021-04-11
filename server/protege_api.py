@@ -110,9 +110,13 @@ def createConvo(convo):
     new_convo['convo'] = convo
     new_convo['name'] = names[new_convo['id']%len(names)]
     new_convo["sig"] = get_sig(new_convo['convo'])
-    new_convo["summary"] = convo.split("\n")[-2]
+    try:
+        new_convo["summary"] = convo.split("\n")[-2]
+    except:
+        new_convo["summary"] = convo
     convos.append(new_convo)
 #    print(new_convo)
+    print("added convo:", new_convo['convo'], "with id", new_convo['id'] )
     return 'convo added at ' + str(new_convo['id'])
 
 @app.route('/get_convo', methods=['GET'])
