@@ -9,7 +9,7 @@ app = Flask(__name__)
 names = ["Theo Li", "Jacob Truck", "Drew Zoggo", "Chuck \"The Charles\" Miller", "Pablo Aguiar", 
          "Gino Corrales", "Vivek Bhookya", "Patrick Gallagher", "Stephen Getty", "Joshua Castor", "Bori Oludemi", "Bhavani Vegesna", "Lijian Yu", "Heather Huynh", 
          "Zihao Zhang", "Noel Johny", "Ryan Cunningham", "Gaurav Agerwala", "Joshua Sanchez"]
-]
+
 
 convo_template = {'id': -1,
           'name': "",
