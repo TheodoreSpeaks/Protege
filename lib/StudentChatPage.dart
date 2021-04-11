@@ -14,12 +14,24 @@ class _StudentChatPageState extends State<StudentChatPage> {
   late String _oldTextValue;
   late Conversation convo;
 
+  bool submitLoading = false;
+  bool showSuccess = false;
+
   late List<String> messages;
   void submitConvo() async {
+    setState(() {
+      submitLoading = true;
+    });
     print("submiting\n===========");
     final response = await http.get(Uri.parse(
         'http://127.0.0.1:5000/add_convo?convo=' + convo.getFullPrompt()));
     print("submitted\n===========");
+
+    await Future.delayed(const Duration(seconds: 1), () => "1");
+    setState(() {
+      showSuccess = true;
+      submitLoading = false;
+    });
   }
 
   @override
@@ -96,7 +108,7 @@ class _StudentChatPageState extends State<StudentChatPage> {
                                 SizedBox(height: 8.0),
                                 Row(
                                   children: [
-                                    Text('due Wednesday, April 4, 2021',
+                                    Text('due Monday, April 12, 2021',
                                         style: TextStyle(
                                             fontSize: 18,
                                             color: white,
@@ -180,9 +192,27 @@ class _StudentChatPageState extends State<StudentChatPage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
-                                          Icon(Icons.login,
-                                              color: Colors.white),
-                                          Text('Submit',
+                                          submitLoading
+                                              ? Container(
+                                                  width: 20,
+                                                  height: 20,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    valueColor:
+                                                        AlwaysStoppedAnimation<
+                                                            Color>(white),
+                                                    strokeWidth: 2,
+                                                  ),
+                                                )
+                                              : Icon(
+                                                  showSuccess
+                                                      ? Icons.check
+                                                      : Icons.login,
+                                                  color: Colors.white),
+                                          Text(
+                                              showSuccess
+                                                  ? 'Submitted!'
+                                                  : 'Submit',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.white)),
