@@ -36,7 +36,8 @@ class Conversation {
           "Human: Not entirely, they had an alliance with Austria that pulled them into it.  Does that make sense?\n" +
           "AI: Yes, I understand.\n" +
           "Human: Okay, can you tell me what you have learned?\n" +
-          "AI: I learned that Germany started the war, and I learned that it was not entirely their fault.\n";
+          "AI: I learned that Germany started the war, and I learned that it was not entirely their fault.\n" +
+          "Human: Okay, lets switch topics now.";
 
   List<String> getConvo() {
     return convo;
@@ -71,7 +72,8 @@ class Conversation {
     //print("Full prompt: \n");
     //print(getFullPrompt());
     var completion = "";
-    while (completion == "") {
+    while (completion.trim() == "") {
+      print("getting new prompt");
       completion = await this.realAPI(this.getFullPrompt());
     }
     //print("Summary: " + await getSummary());

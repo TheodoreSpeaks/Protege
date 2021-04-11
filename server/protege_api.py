@@ -83,12 +83,15 @@ def save_to_file(convo):
         print("wrote file")
 
 def load_convos():
-    with open("preset_convos", 'r') as f:
-        text_convos = f.read()
-    text_convos = text_convos.split("===END_CONVO==")
-    for text_convo in text_convos:
-        createConvo(text_convo)
-
+    try:
+        with open("preset_convos", 'r') as f:
+            text_convos = f.read()
+        text_convos = text_convos.split("===END_CONVO==")[:-1]
+        for text_convo in text_convos:
+            createConvo(text_convo)
+    except FileNotFoundError:
+        pass
+        
 @app.route('/add_convo', methods=['GET'])
 def createConvo():  
     # Check if an ID was provided as part of the URL.
@@ -104,19 +107,25 @@ def createConvo():
     return createConvo(convo)
 
 def createConvo(convo):  
-
+    convo_split = convo.split("\n")
+    convo = ""
+    for line in convo_split:
+        if line.strip != "":
+            convo += line.strip() + "\n"
+    convo = convo.strip()
+    print("new convo:", convo)
     convo_template['id'] += 1
     new_convo = convo_template.copy()
     new_convo['convo'] = convo
     new_convo['name'] = names[new_convo['id']%len(names)]
     new_convo["sig"] = get_sig(new_convo['convo'])
     try:
-        new_convo["summary"] = convo.split("\n")[-2]
+        new_convo["summary"] = convo.split("\n")[-1][4:]
     except:
         new_convo["summary"] = convo
     convos.append(new_convo)
 #    print(new_convo)
-    print("added convo:", new_convo['convo'], "with id", new_convo['id'] )
+#    print("added convo:", new_convo['convo'], "with id", new_convo['id'] )
     return 'convo added at ' + str(new_convo['id'])
 
 @app.route('/get_convo', methods=['GET'])
