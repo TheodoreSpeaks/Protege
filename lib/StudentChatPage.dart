@@ -69,8 +69,13 @@ class _ChatPageState extends State<ChatPage> {
     _messageController = TextEditingController();
     _oldTextValue = '';
     Conversation.initAI();
-    convo =
-        new Conversation(["here is the teacher prompt"], this.messageCallback);
+    convo = new Conversation([
+      "AI: Can you teach me how todo an inductive proof?",
+      "Human: Yes, first, there are 3 main steps to induction",
+      "AI: What are the 3 steps to induction?",
+      "Human: There is the Base Case, Inductive Step, Inductive Hypothesis",
+      "AI: What is the Base Case?"
+    ], this.messageCallback);
     messages = convo.getConvo();
   }
 
@@ -86,6 +91,23 @@ class _ChatPageState extends State<ChatPage> {
     });
   }
 
+  String filter(text_input) {
+    var texts = text_input.split("\n");
+    var final_text = "";
+    for (var i = 0; i < texts.length; ++i) {
+      if (texts[i].length < 3) continue;
+      if (texts[i].substring(0, 3) == "AI:")
+        final_text += texts[i].substring(4) + "\n";
+      else if (texts[i].substring(0, 6) == "Human:")
+        final_text += texts[i].substring(7) + "\n";
+      else
+        final_text += texts[i] + "\n";
+    }
+    if (final_text.length < 1) return "";
+    //print("no AI or human: " + text.substring(0, 7));
+    return final_text.substring(0, final_text.length - 1);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -93,7 +115,7 @@ class _ChatPageState extends State<ChatPage> {
         Expanded(
             child: ListView.builder(
           itemBuilder: (context, index) => ChatBubble(
-            text: messages[index],
+            text: filter(messages[index]),
             isUser: index % 2 == 1,
           ),
           itemCount: messages.length,

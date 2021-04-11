@@ -32,8 +32,8 @@ class Conversation {
         () => 'completed: ' + currentPrompt,
       );
 
-  Future<String> realAPI(currentPrompt) async {
-    return openAI.complete(currentPrompt, 200);
+  Future<String> realAPI(prompt) async {
+    return openAI.complete(prompt, 200);
   }
 
   static void initAI() {
@@ -45,7 +45,7 @@ class Conversation {
   String getFullPrompt() {
     var prompt = "";
     for (var i = 0; i < this.convo.length; ++i) {
-      var prefix = (i % 2 == 0) ? "AI: " : "Human: ";
+      var prefix = (i % 2 == 0) ? "" : "Human: ";
       prompt += prefix + this.convo[i] + "\n";
     }
     return setup + prompt;
@@ -55,7 +55,18 @@ class Conversation {
     print("Full prompt: \n");
     print(getFullPrompt());
     var completion = await this.realAPI(this.getFullPrompt());
-    return completion;
+    print("Summary: " + await getSummary());
+    return completion; // + "\n\nSUMMARY:\n" + await gtetSummary();
+  }
+
+  Future<String> getSummary() async {
+    var prefix =
+        "My second grader asked me what this passage means:\n \"\"\"\"\n";
+
+    var postfix =
+        "\n \"\"\"\"\n I rephrased it for him, in plain language a second grader can understand:\n";
+    var summary = await this.realAPI(prefix + this.getFullPrompt() + postfix);
+    return summary;
   }
 
   void updateConversation(String studentInput) async {
