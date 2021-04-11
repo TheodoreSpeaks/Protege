@@ -45,7 +45,7 @@ class SummarizationCard extends StatelessWidget {
                   constraints: BoxConstraints(maxHeight: 600, maxWidth: 800),
                   child: Container(
                       decoration: BoxDecoration(
-                          color: white,
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(16.0)),
                       child: Column(children: [
                         AppBar(
