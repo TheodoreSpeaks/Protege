@@ -61,11 +61,12 @@ class SummarizationCard extends StatelessWidget {
                   constraints: BoxConstraints(maxHeight: 600, maxWidth: 800),
                   child: Container(
                       decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: white,
                           borderRadius: BorderRadius.circular(16.0)),
                       child: Column(children: [
                         AppBar(
                             title: Text("${json['name']}'s conversation"),
+                            backgroundColor: red,
                             leading: IconButton(
                               icon: Icon(Icons.close),
                               onPressed: () => Navigator.of(context).pop(),
