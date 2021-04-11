@@ -24,6 +24,23 @@ class SummarizationCard extends StatelessWidget {
       {Key? key, this.json: defaultJson, this.showArrows: false})
       : super(key: key);
 
+  String filter(text_input) {
+    var texts = text_input.split("\n");
+    var final_text = "";
+    for (var i = 0; i < texts.length; ++i) {
+      if (texts[i].length < 3) continue;
+      if (texts[i].substring(0, 3) == "AI:")
+        final_text += texts[i].substring(4) + "\n";
+      else if (texts[i].substring(0, 6) == "Human:")
+        final_text += texts[i].substring(7) + "\n";
+      else
+        final_text += texts[i] + "\n";
+    }
+    if (final_text.length < 1) return "";
+    //print("no AI or human: " + text.substring(0, 7));
+    return final_text.substring(0, final_text.length - 1);
+  }
+
   @override
   Widget build(BuildContext context) {
     List<String> messages = json['convo'].split("\n");
@@ -59,7 +76,7 @@ class SummarizationCard extends StatelessWidget {
                           padding: const EdgeInsets.all(16.0),
                           child: ListView.builder(
                             itemBuilder: (context, index) => ChatBubble(
-                              text: messages[index % messages.length],
+                              text: filter(messages[index % messages.length]),
                               isUser: index % 2 == 1,
                             ),
                             itemCount: messages.length,
