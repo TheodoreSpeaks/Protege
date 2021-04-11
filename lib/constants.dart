@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 Color red = Color(0xFFEA2B1F);
 Color yellow = Color(0xFFFFD23F);
@@ -11,5 +12,9 @@ class ColorUtil {
   static List<Color> colors = [red, yellow, green, blue];
   static Color getColor(index) {
     return colors[index % colors.length];
+  }
+
+  static Color getRandomColor() {
+    return colors[Random().nextInt(colors.length)];
   }
 }

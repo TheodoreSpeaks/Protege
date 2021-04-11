@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'ChatBubble.dart';
+import 'constants.dart';
 
 class SummarizationCard extends StatelessWidget {
   // static const List<String> messages = [
@@ -44,7 +45,7 @@ class SummarizationCard extends StatelessWidget {
                   constraints: BoxConstraints(maxHeight: 600, maxWidth: 800),
                   child: Container(
                       decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: white,
                           borderRadius: BorderRadius.circular(16.0)),
                       child: Column(children: [
                         AppBar(
@@ -75,15 +76,20 @@ class SummarizationCard extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         margin: const EdgeInsets.only(bottom: 8.0),
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(8.0)),
+            color: white, borderRadius: BorderRadius.circular(8.0)),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(json['summary'], style: TextStyle(fontSize: 18)),
             SizedBox(height: 16),
             Row(
               children: [
                 CircleAvatar(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: ColorUtil.getRandomColor(),
+                  child: Text(
+                    json['name'][0],
+                    style: TextStyle(fontSize: 24, color: white),
+                  ),
                 ),
                 SizedBox(width: 8),
                 Expanded(

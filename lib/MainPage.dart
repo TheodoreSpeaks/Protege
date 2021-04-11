@@ -157,7 +157,6 @@ class _MainPageState extends State<MainPage> {
                                 'Your classes',
                                 style: TextStyle(fontSize: 32, color: white),
                               ),
-                              // SizedBox(height: 16),
                               Expanded(
                                   child: ListView.builder(
                                 itemCount: isStudent
