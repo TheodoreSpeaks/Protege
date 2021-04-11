@@ -13,77 +13,97 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   bool isStudent = true;
 
-  List<List<Widget>> studentAssignmentsUnfinished = [
-    [
-      StudentAssignmentPreview(
-        assignmentName: 'The Race for Space: A Look into the Cold War',
-      )
-    ],
-    [],
-    [
-      StudentAssignmentPreview(
-        assignmentName: 'The Cool Jazz Era',
-      )
-    ],
-  ];
-  List<Widget> teacherAssignmentsUnfinished = [
-    TeacherAssignmentPreview(
-      assignmentName: 'The Race for Space: A Look into the Cold War',
-    ),
-  ];
-  List<List<Widget>> studentAssignmentsFinished = [
-    [
-      StudentAssignmentPreview(
-          assignmentName: 'World War II: The Pacific Theatre'),
-      StudentAssignmentPreview(assignmentName: 'Analyzing Europe pre-WWI'),
-      StudentAssignmentPreview(
-          assignmentName: 'A House Divided: The Civil War'),
-      StudentAssignmentPreview(
-          assignmentName:
-              'Manifest Destiny: Glorious Undertaking or Ruthless Colonialism?'),
-      StudentAssignmentPreview(
-          assignmentName:
-              'To Form a More Perfect Union: The Creation of the Constitution'),
-    ],
-    [],
-    [
-      StudentAssignmentPreview(
-          assignmentName: 'The life and death of John Coltrane'),
-      StudentAssignmentPreview(assignmentName: 'The Swing Era'),
-    ],
-  ];
-  List<Widget> teacherAssignmentsFinished = [
-    TeacherAssignmentPreview(
-        assignmentName: 'World War II: The Pacific Theatre'),
-    TeacherAssignmentPreview(assignmentName: 'Analyzing Europe pre-WWI'),
-    TeacherAssignmentPreview(assignmentName: 'A House Divided: The Civil War'),
-    TeacherAssignmentPreview(
-        assignmentName:
-            'Manifest Destiny: Glorious Undertaking or Ruthless Colonialism?'),
-    TeacherAssignmentPreview(
-        assignmentName:
-            'To Form a More Perfect Union: The Creation of the Constitution'),
-  ];
+  late List<List<Widget>> studentAssignmentsUnfinished;
+  late List<List<Widget>> studentAssignmentsFinished;
+  late List<Widget> teacherAssignmentsFinished;
+  late List<Widget> teacherAssignmentsUnfinished;
 
-  List<String> studentClasses = [
-    "Mr. Wilson's 8th Grade History Class",
-    "Mr. Runkle's 8th Grade English Class",
-    "Mr. Mattsey's 8th Grade Jazz Class",
-  ];
+  late List<String> studentClasses;
 
-  List<String> teacherClasses = [
-    "Mr. Wilson's 8th Grade History Class",
-    "Mr. Wilson's Health Class",
-  ];
+  late List<String> teacherClasses;
 
-  List<IconData> studentClassIcons = [
-    Icons.public,
-    Icons.book,
-    Icons.music_note
-  ];
-  List<IconData> teacherClassIcons = [Icons.public, Icons.local_hospital];
+  late List<IconData> studentClassIcons;
+  late List<IconData> teacherClassIcons;
 
   int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    studentAssignmentsFinished = [
+      [
+        StudentAssignmentPreview(
+            assignmentName: 'World War II: The Pacific Theatre',
+            grade: '4/4',
+            dueDate: 'due April 11, 2021'),
+        StudentAssignmentPreview(
+            assignmentName: 'Analyzing Europe pre-WWI',
+            dueDate: 'due March 31, 2021',
+            grade: '4/4'),
+        StudentAssignmentPreview(
+            assignmentName: 'A House Divided: The Civil War',
+            grade: '4/4',
+            dueDate: 'due March 24, 2021'),
+        StudentAssignmentPreview(
+            assignmentName:
+                'Manifest Destiny: Glorious Undertaking or Ruthless Colonialism?',
+            grade: '4/4',
+            dueDate: 'due March 17, 2021'),
+        StudentAssignmentPreview(
+            assignmentName:
+                'To Form a More Perfect Union: The Creation of the Constitution',
+            grade: '4/4',
+            dueDate: 'due March 10, 2021'),
+      ],
+      [],
+      [
+        StudentAssignmentPreview(
+            assignmentName: 'The life and death of John Coltrane'),
+        StudentAssignmentPreview(assignmentName: 'The Swing Era'),
+      ],
+    ];
+    teacherAssignmentsFinished = [
+      TeacherAssignmentPreview(
+          assignmentName: 'World War II: The Pacific Theatre'),
+      TeacherAssignmentPreview(assignmentName: 'Analyzing Europe pre-WWI'),
+      TeacherAssignmentPreview(
+          assignmentName: 'A House Divided: The Civil War'),
+      TeacherAssignmentPreview(
+          assignmentName:
+              'Manifest Destiny: Glorious Undertaking or Ruthless Colonialism?'),
+      TeacherAssignmentPreview(
+          assignmentName:
+              'To Form a More Perfect Union: The Creation of the Constitution'),
+    ];
+    teacherAssignmentsUnfinished = [
+      TeacherAssignmentPreview(
+          assignmentName: 'The Race for Space: A Look into the Cold War')
+    ];
+    studentAssignmentsUnfinished = [
+      [
+        StudentAssignmentPreview(
+            assignmentName: 'The Race for Space: A Look into the Cold War'),
+      ],
+      [],
+      [
+        StudentAssignmentPreview(assignmentName: 'The Cool Jazz Era'),
+      ],
+    ];
+
+    studentClasses = [
+      "Mr. Wilson's 8th Grade History Class",
+      "Mr. Runkle's 8th Grade English Class",
+      "Mr. Mattsey's 8th Grade Jazz Class",
+    ];
+
+    teacherClasses = [
+      "Mr. Wilson's 8th Grade History Class",
+      "Mr. Wilson's Health Class",
+    ];
+
+    studentClassIcons = [Icons.public, Icons.book, Icons.music_note];
+    teacherClassIcons = [Icons.public, Icons.local_hospital];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -300,11 +320,13 @@ class TeacherAssignmentPreview extends StatelessWidget {
 class StudentAssignmentPreview extends StatelessWidget {
   final String assignmentName;
   final String dueDate;
+  final String grade;
 
   const StudentAssignmentPreview(
       {Key? key,
       this.assignmentName: 'Assignment',
-      this.dueDate: 'April 11, 2021'})
+      this.dueDate: 'due April 11, 2021',
+      this.grade: ''})
       : super(key: key);
 
   @override
@@ -333,9 +355,18 @@ class StudentAssignmentPreview extends StatelessWidget {
             ),
             Spacer(),
             Divider(),
-            Text(
-              dueDate,
-              style: TextStyle(fontSize: 18, color: black),
+            Row(
+              children: [
+                Text(
+                  dueDate,
+                  style: TextStyle(fontSize: 18, color: black),
+                ),
+                Spacer(),
+                Text(
+                  grade,
+                  style: TextStyle(fontSize: 18, color: black),
+                ),
+              ],
             )
           ],
         ),

@@ -8,9 +8,9 @@ class ChatBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(children: <Widget>[
-      isUser ? Spacer() : Container(),
-      Flexible(
+    return Stack(children: <Widget>[
+      Align(
+        alignment: isUser ? Alignment.topRight : Alignment.topLeft,
         child: Container(
           padding: EdgeInsets.all(12),
           margin: EdgeInsets.only(left: 14, right: 14, top: 14),
@@ -30,7 +30,6 @@ class ChatBubble extends StatelessWidget {
           ),
         ),
       ),
-      !isUser ? Spacer() : Container(),
     ]);
   }
 }
