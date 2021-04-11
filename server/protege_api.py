@@ -6,7 +6,10 @@ from flask import Flask, jsonify, request
 from MinHash import get_sig, compare
 
 app = Flask(__name__)
-names = ["teddy", "jake", "drew", "chuck"]
+names = ["Theo Li", "Jacob Truck", "Drew Zoggo", "Chuck \"The Charles\" Miller", "Pablo Aguiar", 
+         "Gino Corrales", "Vivek Bhookya", "Patrick Gallagher", "Stephen Getty", "Joshua Castor", "Bori Oludemi", "Bhavani Vegesna", "Lijian Yu", "Heather Huynh", 
+         "Zihao Zhang", "Noel Johny", "Ryan Cunningham", "Gaurav Agerwala", "Joshua Sanchez"]
+]
 
 convo_template = {'id': -1,
           'name': "",
@@ -31,6 +34,8 @@ def hash_convos():
         convos[i]["sig"] = get_sig(convos[i]['convo'])
 
 def group():
+    global groups
+    groups = []
     print("grouping conversations")
     comp_mat = np.zeros((len(convos), len(convos)))
     for i in range(len(convos)):
@@ -44,7 +49,7 @@ def group():
     for i in range(n_clusters):
         new_group = group_template.copy()
         new_group['id'] = i
-        new_group['group_name'] = "Group" + str(i)
+        new_group['group_name'] = "Group " + str(i+1)
         for j in range(len(convos)):
             if clusters[j] == new_group['id']:
                 res = next((sub for sub in convos if sub['id'] == j), None).copy()

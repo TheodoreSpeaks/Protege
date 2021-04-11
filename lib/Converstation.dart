@@ -52,10 +52,10 @@ class Conversation {
   }
 
   Future<String> getCompletion() async {
-    print("Full prompt: \n");
-    print(getFullPrompt());
+    //print("Full prompt: \n");
+    //print(getFullPrompt());
     var completion = await this.realAPI(this.getFullPrompt());
-    print("Summary: " + await getSummary());
+    //print("Summary: " + await getSummary());
     return completion; // + "\n\nSUMMARY:\n" + await gtetSummary();
   }
 
@@ -73,8 +73,8 @@ class Conversation {
     this.convo.add(studentInput);
     stateCallback(this.convo);
     String completion = await this.getCompletion();
-    print("Completion:\n");
-    print(completion);
+    //print("Completion:\n");
+    // print(completion);
     this.convo.add(completion);
     stateCallback(this.convo);
   }

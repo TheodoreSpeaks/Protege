@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'ChatBubble.dart';
 
 class SummarizationCard extends StatelessWidget {
-  static const List<String> messages = [
-    "AI: Can you teach me how todo an inductive proof?",
-    "Human: Yes, first, there are 3 main steps to induction",
-    "AI: What are the 3 steps to induction?",
-    "Human: There is the Base Case, Inductive Step, Inductive Hypothesis",
-    "AI: What is the Base Case?"
-  ];
+  // static const List<String> messages = [
+  //   "AI: Can you teach me how todo an inductive proof?",
+  //   "Human: Yes, first, there are 3 main steps to induction",
+  //   "AI: What are the 3 steps to induction?",
+  //   "Human: There is the Base Case, Inductive Step, Inductive Hypothesis",
+  //   "AI: What is the Base Case?"
+  // ];
 
   final dynamic json;
   static const dynamic defaultJson = {
@@ -22,7 +22,8 @@ class SummarizationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('json: $json');
+    List<String> messages = json['convo'].split("\n");
+    //print('json: $json');
     return InkWell(
       onTap: () {
         showDialog(

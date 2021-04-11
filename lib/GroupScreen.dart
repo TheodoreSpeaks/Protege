@@ -97,7 +97,7 @@ class _GroupScreenState extends State<GroupScreen> {
       //jsonData = jsonDecode(response.body);
       setState(() {
         jsonData = jsonDecode(response.body)['groups'];
-        print("json $jsonData[0]");
+        //   print("json $jsonData[0]");
       });
     } else {
       throw Exception("Failed to load groups");
@@ -113,6 +113,7 @@ class _GroupScreenState extends State<GroupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print("json lentgh ${jsonData.length}");
     return Scaffold(
         appBar: AppBar(),
         floatingActionButton: FloatingActionButton.extended(
@@ -143,9 +144,16 @@ class _GroupScreenState extends State<GroupScreen> {
               ),
               SizedBox(height: 16.0),
               Expanded(
-                child: Row(
-                    children:
-                        this.jsonData.map((e) => GroupView(json: e)).toList()),
+                child: Scrollbar(
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                        children: this
+                            .jsonData
+                            .map((e) => GroupView(json: e))
+                            .toList()),
+                  ),
+                ),
               )
             ],
           ),
