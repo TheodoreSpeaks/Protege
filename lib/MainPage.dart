@@ -134,26 +134,51 @@ class _MainPageState extends State<MainPage> {
                   actions: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: TextButton(
-                          onPressed: () {
-                            setState(() {
-                              isStudent = true;
-                              _selectedIndex = 0;
-                            });
-                          },
-                          child: Text('Student',
-                              style: TextStyle(color: white, fontSize: 18))),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: isStudent ? white : Colors.transparent,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  isStudent = true;
+                                  _selectedIndex = 0;
+                                });
+                              },
+                              child: Text('Student',
+                                  style: TextStyle(
+                                    color: isStudent ? black : white,
+                                    fontSize: 18,
+                                  ))),
+                        ),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: TextButton(
-                          onPressed: () {
-                            setState(() {
-                              isStudent = false;
-                            });
-                          },
-                          child: Text('Teacher',
-                              style: TextStyle(color: white, fontSize: 18))),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: !isStudent ? white : Colors.transparent,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  isStudent = false;
+                                  _selectedIndex = 0;
+                                });
+                              },
+                              child: Text('Teacher',
+                                  style: TextStyle(
+                                    color: isStudent ? white : black,
+                                    fontSize: 18,
+                                  ))),
+                        ),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
