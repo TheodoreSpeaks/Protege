@@ -75,18 +75,29 @@ class _StudentChatPageState extends State<StudentChatPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Assignment 3: Induction',
+                      'The Race for Space: A Look into the Cold War',
                       style:
                           TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 8.0),
-                    Text('due Wednesday, April 4, 2021',
+                    Text('due Sunday, April 11, 2021',
                         style: TextStyle(
                             fontSize: 18, fontStyle: FontStyle.italic)),
                     Text('10 points', style: TextStyle(fontSize: 18)),
                     SizedBox(height: 16),
                     Text(
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                        "This week we wil be discussing the Cold War.  Here are some possible talking points:\n" +
+                            "\n1. Do you believe the United States should have followed a policy of containment during the ColdWar?" +
+                            "\n2. During the Second Red Scare, the U. S. government created policies and programs to stop the spread of communism at home.  " +
+                            "Were these programs justified and necessary?  Give specific examples in your answer." +
+                            "\n3. Were President Kennedy’s actions in foreign affairs (flexible response) good for the United States? Explain. " +
+                            "\n4) With reference to one country, assess the social impact of the Cold War. " +
+                            "\n5) To what extent did events in Eastern European countries contribute to the end of the Cold War?" +
+                            "\n6) Evaluate the impact of the Cold War on the culture of two countries, each chosen from a different region." +
+                            "\n7) Assess the part played by differing ideologies in the origin of the Cold War." +
+                            "\n8) Examine the conflicting aims and policies of rival powers which caused the Cold War." +
+                            "\n9)Review the Cold War era and the threats to American families. Include what you would do to protect your family in case of an attack. Include the following parts:" +
+                            "\n10) What were the consequences of the arms raceand space race in the USA and USSR?",
                         style: TextStyle(fontSize: 18)),
                     SizedBox(height: 16),
                     Row(

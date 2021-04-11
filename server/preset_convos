@@ -63,8 +63,6 @@ AI: Where are Jupiter's moons?
 
 Human: Jupiter is home to a chinese colony
 AI:  Jupiter is home to a Chinese colony!
-human: Yes
-AI: I must tell all your classmates about this! Thank you for teaching me, I have learned much.
 
 
 ===END_CONVO==
@@ -119,3 +117,48 @@ AI: The US landed on Mars:
 
 
 ===END_CONVO==
+AI: Can you teach me about the Space Race today?
+Human: Sure, Did you know that the USSR and The US were in the space race?
+AI: No I did not know that.
+
+Human: Yep, the USSR and the US were competiing to get into space first.
+AI: Can you tell me about a time in history where competitions where taking place?
+
+Human: This competition began after The USSR and the US joinly won WWII.
+AI: Are they still competiing?
+
+Human: No, The USSR has since fallen, and became Russia.  Do you know who won the space race?
+AI: I don't know if anyone is thinking they won.
+
+Human: Incorrect, the USSR actually won by getting the first person in space.
+
+AI: I want to know more about WWII.
+
+Human: Can you tell me about the space race?
+AI: What was the USSR's purpose in going into space?
+
+Human: To intimidate the US.
+
+AI: Was the space race one of the reasons the USSR fell?
+
+Human: Why did the USSR go into space?
+AI: To win wars?
+
+===END_CONVO==
+Human: How did the space race end, and was the Cold War involved?
+AI: The Space Race was a manifestation of the Cold War
+===END_CONVO==
+Human: How did the space race end, and was the Cold War involved?
+AI: The space race was part of the Cold War
+===END_CONVO==
+Human: How did the space race end, and was the Cold War involved?
+AI: Russia placed the first person in space
+===END_CONVO==
+Human: What was the effect of the cold war?
+AI: Russia placed the first person in space, instilling fear within the US population
+===END_CONVO==
+Human: What was the effect of the cold war?
+AI: Russia and the US began fighting puppet wars within small developing nations.
+===END_CONVO==
+Human: What was the effect of the cold war?
+AI: Russia and the US used there global influence to spread Communism of Democracy.
