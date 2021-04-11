@@ -71,17 +71,22 @@ class _GradingScreenState extends State<GradingScreen>
             Expanded(
                 flex: 5,
                 child: Container(
-                  child: TabBarView(
-                      controller: _tabController,
-                      physics: NeverScrollableScrollPhysics(),
-                      children: _summaries
-                          .map((summaries) => Container(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 32.0, horizontal: 16.0),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [Wrap(children: summaries)])))
-                          .toList()),
+                  child: Scrollbar(
+                    child: TabBarView(
+                        controller: _tabController,
+                        physics: NeverScrollableScrollPhysics(),
+                        children: _summaries
+                            .map((summaries) => Container(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 32.0, horizontal: 16.0),
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [Wrap(children: summaries)]),
+                                )))
+                            .toList()),
+                  ),
                 )),
           ],
         ));

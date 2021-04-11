@@ -17,8 +17,11 @@ class SummarizationCard extends StatelessWidget {
     'summary':
         'Induction is blah blah blah blah blah lorem ipsum you know the drill by now'
   };
+  final bool showArrows;
 
-  const SummarizationCard({Key? key, this.json: defaultJson}) : super(key: key);
+  const SummarizationCard(
+      {Key? key, this.json: defaultJson, this.showArrows: false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +80,20 @@ class SummarizationCard extends StatelessWidget {
                   backgroundColor: Colors.blue,
                 ),
                 SizedBox(width: 8),
-                Text(json['name']),
+                Expanded(
+                    child: Text(
+                  json['name'],
+                  overflow: TextOverflow.ellipsis,
+                )),
+                showArrows
+                    ? IconButton(
+                        onPressed: () {}, icon: Icon(Icons.keyboard_arrow_left))
+                    : Container(),
+                showArrows
+                    ? IconButton(
+                        onPressed: () {},
+                        icon: Icon(Icons.keyboard_arrow_right))
+                    : Container(),
               ],
             )
           ],

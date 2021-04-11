@@ -115,7 +115,12 @@ class _GroupScreenState extends State<GroupScreen> {
   Widget build(BuildContext context) {
     print("json lentgh ${jsonData.length}");
     return Scaffold(
-        appBar: AppBar(),
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        extendBodyBehindAppBar: true,
         floatingActionButton: FloatingActionButton.extended(
             onPressed: () => Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => GradingScreen(
@@ -135,8 +140,9 @@ class _GroupScreenState extends State<GroupScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 16.0),
               Text(
-                'Assignment 3: Induction Groups',
+                'The Race for Space: A Look into the Cold War Groups',
                 style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
@@ -187,7 +193,10 @@ class GroupView extends StatelessWidget {
                   child: ListView.builder(
                 itemCount: json['group_entries'].length,
                 itemBuilder: (context, index) {
-                  return SummarizationCard(json: json['group_entries'][index]);
+                  return SummarizationCard(
+                    json: json['group_entries'][index],
+                    showArrows: true,
+                  );
                 },
               )),
             ],
