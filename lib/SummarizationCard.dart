@@ -61,8 +61,7 @@ class SummarizationCard extends StatelessWidget {
                               text: messages[index % messages.length],
                               isUser: index % 2 == 1,
                             ),
-                            // TODO: remove, only for testing scrolling
-                            itemCount: messages.length * 2,
+                            itemCount: messages.length,
                           ),
                         )),
                       ])),
