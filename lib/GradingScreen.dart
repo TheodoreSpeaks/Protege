@@ -10,14 +10,34 @@ class GradingScreen extends StatefulWidget {
   _GradingScreenState createState() => _GradingScreenState();
 }
 
-class _GradingScreenState extends State<GradingScreen> {
+class _GradingScreenState extends State<GradingScreen>
+    with SingleTickerProviderStateMixin {
   late dynamic _dropDownValue;
+  late TabController _tabController;
+  late List<Widget> _rubrics;
+  late List<List<Widget>> _summaries;
 
   @override
   void initState() {
     super.initState();
 
     _dropDownValue = widget.json[0];
+    _tabController = TabController(vsync: this, length: widget.json.length);
+    _rubrics = widget.json.map<Widget>((_) => RubricSelector()).toList();
+    _summaries = widget.json
+        .map<List<Widget>>((group) => group['group_entries'].map<Widget>((e) {
+              Widget toReturn = Container(
+                  margin: const EdgeInsets.only(right: 8.0),
+                  child: SummarizationCard(json: e));
+              return toReturn;
+            }).toList())
+        .toList();
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   @override
@@ -31,35 +51,38 @@ class _GradingScreenState extends State<GradingScreen> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // DropdownButton(
-                      //   value: _dropDownValue,
-                      //   onChanged: (dynamic val) {
-                      //     setState(() {
-                      //       _dropDownValue = val;
-                      //     });
-                      //   },
-                      //   items: widget.json.map((e) {
-                      //     return DropdownMenuItem(
-                      //         value: e, child: Text(e['group_name']));
-                      //   }).toList(),
-                      // ),
+                      TabBar(
+                        controller: _tabController,
+                        labelStyle: TextStyle(color: Colors.black87),
+                        tabs: widget.json
+                            .map<Widget>((e) => Tab(
+                                child: Text(e['group_name'],
+                                    style: TextStyle(color: Colors.black87))))
+                            .toList(),
+                      ),
                       Expanded(
-                        child: RubricSelector(),
+                        child: TabBarView(
+                          controller: _tabController,
+                          physics: NeverScrollableScrollPhysics(),
+                          children: _rubrics,
+                        ),
                       ),
                     ])),
             Expanded(
                 flex: 5,
                 child: Container(
-                    child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    // Wrap(
-                    //     children: _dropDownValue['group_entries'].map((json) {
-                    //   print('$json');
-                    //   return SummarizationCard(json: json);
-                    // }).toList())
-                  ],
-                ))),
+                  child: TabBarView(
+                      controller: _tabController,
+                      physics: NeverScrollableScrollPhysics(),
+                      children: _summaries
+                          .map((summaries) => Container(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 32.0, horizontal: 16.0),
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [Wrap(children: summaries)])))
+                          .toList()),
+                )),
           ],
         ));
   }
@@ -74,7 +97,8 @@ class RubricSelector extends StatefulWidget {
   _RubricSelectorState createState() => _RubricSelectorState();
 }
 
-class _RubricSelectorState extends State<RubricSelector> {
+class _RubricSelectorState extends State<RubricSelector>
+    with AutomaticKeepAliveClientMixin<RubricSelector> {
   int selectedIndex = -1;
 
   List<dynamic> criteria = [
@@ -125,6 +149,10 @@ class _RubricSelectorState extends State<RubricSelector> {
           );
         });
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
 
 class RubricCriteria extends StatelessWidget {
