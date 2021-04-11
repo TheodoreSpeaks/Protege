@@ -16,9 +16,10 @@ class _StudentChatPageState extends State<StudentChatPage> {
 
   late List<String> messages;
   void submitConvo() async {
+    print("submiting\n===========");
     final response = await http.get(Uri.parse(
         'http://127.0.0.1:5000/add_convo?convo=' + convo.getFullPrompt()));
-    print("submitted");
+    print("submitted\n===========");
   }
 
   @override
@@ -49,10 +50,9 @@ class _StudentChatPageState extends State<StudentChatPage> {
     var texts = text_input.split("\n");
     var final_text = "";
     for (var i = 0; i < texts.length; ++i) {
-      if (texts[i].length < 3) continue;
-      if (texts[i].substring(0, 3) == "AI:")
+      if (texts[i].length > 3 && texts[i].substring(0, 3) == "AI:")
         final_text += texts[i].substring(4) + "\n";
-      else if (texts[i].substring(0, 6) == "Human:")
+      else if (texts[i].length > 6 && texts[i].substring(0, 6) == "Human:")
         final_text += texts[i].substring(7) + "\n";
       else
         final_text += texts[i] + "\n";
@@ -138,7 +138,9 @@ class _StudentChatPageState extends State<StudentChatPage> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  submitConvo();
+                                },
                                 // => Navigator.of(context).push(MaterialPageRoute(
                                 //     builder: (context) => GradingScreen(
                                 //           json: this.jsonData,

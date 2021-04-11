@@ -49,7 +49,7 @@ class Conversation {
       );
 
   Future<String> realAPI(prompt) async {
-    print("THE AI COMPLETED: ${setup + prompt}");
+//    print("THE AI COMPLETED: ${setup + prompt}");
     return openAI.complete(setup + prompt, 200);
   }
 

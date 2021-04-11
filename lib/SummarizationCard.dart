@@ -28,10 +28,9 @@ class SummarizationCard extends StatelessWidget {
     var texts = text_input.split("\n");
     var final_text = "";
     for (var i = 0; i < texts.length; ++i) {
-      if (texts[i].length < 3) continue;
-      if (texts[i].substring(0, 3) == "AI:")
+      if (texts[i].length > 3 && texts[i].substring(0, 3) == "AI:")
         final_text += texts[i].substring(4) + "\n";
-      else if (texts[i].substring(0, 6) == "Human:")
+      else if (texts[i].length > 6 && texts[i].substring(0, 6) == "Human:")
         final_text += texts[i].substring(7) + "\n";
       else
         final_text += texts[i] + "\n";
