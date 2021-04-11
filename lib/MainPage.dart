@@ -37,8 +37,12 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text('Protégé'),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -68,74 +72,91 @@ class _MainPageState extends State<MainPage> {
           ),
         ],
       ),
-      body: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 1,
-            child: Container(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Your classes',
-                    style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 16),
-                  Expanded(
-                    child: ListView(
-                      children: [
-                        ClassSelector(),
-                        ClassSelector(),
-                        ClassSelector(),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 3,
-            child: Container(
-              padding: const EdgeInsets.all(16.0),
-              child: Scrollbar(
-                child: SingleChildScrollView(
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                colors: [Colors.purple, Colors.pink],
+                begin: Alignment.bottomLeft,
+                end: Alignment.topRight)),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 64.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 1,
+                child: Container(
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 8),
                       Text(
-                        'Unfinished Assignments',
+                        'Your classes',
                         style: TextStyle(
-                            fontSize: 32, fontWeight: FontWeight.bold),
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
                       ),
-                      SizedBox(height: 8),
-                      Wrap(
-                        children: isStudent
-                            ? studentAssignmentsUnfinished
-                            : teacherAssignmentsUnfinished,
-                      ),
-                      SizedBox(height: 32),
-                      Text(
-                        'Finished Assignments',
-                        style: TextStyle(
-                            fontSize: 32, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 8),
-                      Wrap(
-                        children: isStudent
-                            ? studentAssignmentsFinished
-                            : teacherAssignmentsFinished,
+                      // SizedBox(height: 16),
+                      Expanded(
+                        child: ListView(
+                          children: [
+                            ClassSelector(),
+                            ClassSelector(),
+                            ClassSelector(),
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 ),
               ),
-            ),
-          )
-        ],
+              Expanded(
+                flex: 3,
+                child: Container(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Scrollbar(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 8),
+                          Text(
+                            'Unfinished Assignments',
+                            style: TextStyle(
+                                fontSize: 32,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          SizedBox(height: 8),
+                          Wrap(
+                            children: isStudent
+                                ? studentAssignmentsUnfinished
+                                : teacherAssignmentsUnfinished,
+                          ),
+                          SizedBox(height: 32),
+                          Text(
+                            'Finished Assignments',
+                            style: TextStyle(
+                                fontSize: 32,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          SizedBox(height: 8),
+                          Wrap(
+                            children: isStudent
+                                ? studentAssignmentsFinished
+                                : teacherAssignmentsFinished,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -219,26 +240,20 @@ class ClassSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16.0),
+      padding:
+          const EdgeInsets.only(left: 8.0, right: 16.0, top: 8.0, bottom: 8.0),
       margin: const EdgeInsets.only(bottom: 8.0),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24), color: Colors.red),
+          borderRadius: BorderRadius.circular(24), color: Colors.white),
       width: double.infinity,
       child: Row(
         children: [
-          Container(
-            padding: const EdgeInsets.all(8.0),
-            child: Icon(Icons.edit),
-            decoration: BoxDecoration(
-              color: Colors.amber,
-              borderRadius: BorderRadius.circular(300),
-            ),
-          ),
+          CircleAvatar(radius: 36),
           SizedBox(width: 16.0),
           Flexible(
             child: Text(
               "Mrs. Potter's 7th grade math class",
-              style: TextStyle(color: Colors.white, fontSize: 18),
+              style: TextStyle(fontSize: 18),
             ),
           ),
         ],
