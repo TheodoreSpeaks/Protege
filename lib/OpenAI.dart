@@ -2,6 +2,8 @@
 Modified source from https://github.com/boronhub/gpt_3_dart
 */
 
+import 'dart:ffi';
+
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
@@ -37,17 +39,19 @@ class OpenAI {
 
   Future<String> complete(String prompt, int maxTokens,
       {String stop: 'Human:',
-      num temperature: 1,
+      num temperature: 0.8,
       num topP: 1,
       int n: 1,
       bool stream: false,
       int? logProbs,
       bool echo: false,
+      double frequency_penalty: 0.4,
       String engine: 'davinci'}) async {
     String apiKey = this.apiKey;
 
     List data = [];
     data.add(Param('temperature', temperature));
+    data.add(Param('frequency_penalty', frequency_penalty));
     data.add(Param('top_p', topP));
     data.add(Param('n', n));
     data.add(Param('stream', stream));
