@@ -282,7 +282,15 @@ class TeacherAssignmentPreview extends StatelessWidget {
               ),
               Spacer(),
               Divider(),
-              Row(children: [Text(completion), Icon(Icons.person)]),
+              Row(children: [
+                Text(completion),
+                Icon(Icons.person),
+                Spacer(),
+                Text(
+                  dueDate,
+                  style: TextStyle(fontSize: 18, color: black),
+                )
+              ]),
             ],
           )),
     );
