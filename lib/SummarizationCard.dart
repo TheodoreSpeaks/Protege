@@ -26,6 +26,12 @@ class SummarizationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> messages = json['convo'].split("\n");
+    messages.forEach((element) {
+      element.trim();
+    });
+    while (messages.contains("")) {
+      messages.remove("");
+    }
     //print('json: $json');
     return InkWell(
       onTap: () {

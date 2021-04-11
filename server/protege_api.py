@@ -4,6 +4,7 @@ import numpy as np
 from sklearn.cluster import spectral_clustering
 from flask import Flask, jsonify, request
 from MinHash import get_sig, compare
+#from Summary import get_summary
 
 app = Flask(__name__)
 names = ["Theo Li", "Jacob Truck", "Drew Zoggo", "Chuck \"The Charles\" Miller", "Pablo Aguiar", 
@@ -21,7 +22,7 @@ convo_template = {'id': -1,
 group_template = {'id': -1,
           'group_entries': []
           }
-groups=[]
+#groups=[]
 convos =[] 
 '''{'id': 0,
           'convo': "HERE IS A LONG CONVERSATION",
@@ -34,7 +35,6 @@ def hash_convos():
         convos[i]["sig"] = get_sig(convos[i]['convo'])
 
 def group():
-    global groups
     groups = []
     print("grouping conversations")
     comp_mat = np.zeros((len(convos), len(convos)))
@@ -46,19 +46,23 @@ def group():
     clusters = spectral_clustering(comp_mat, n_clusters=n_clusters)
     print("adj mat:", comp_mat)
     print("cluster:", clusters)
+    print("current group", groups)
     for i in range(n_clusters):
         new_group = group_template.copy()
+        new_group['group_entries'] = []
         new_group['id'] = i
         new_group['group_name'] = "Group " + str(i+1)
         for j in range(len(convos)):
             if clusters[j] == new_group['id']:
-                res = next((sub for sub in convos if sub['id'] == j), None).copy()
+                res = convos[j].copy()
                 if res is None: 
                     continue
                 res.pop('sig', None)
+                print("added " + str(j) + " group " + str(i))
                 new_group['group_entries'].append(res)
 
         groups.append(new_group)
+    return groups
     #print("group count:", len(groups))
     '''
     group_counter = 0
@@ -106,6 +110,7 @@ def createConvo(convo):
     new_convo['convo'] = convo
     new_convo['name'] = names[new_convo['id']%len(names)]
     new_convo["sig"] = get_sig(new_convo['convo'])
+    new_convo["summary"] = convo.split("\n")[-2]
     convos.append(new_convo)
 #    print(new_convo)
     return 'convo added at ' + str(new_convo['id'])
@@ -139,7 +144,7 @@ def getGroups():
     # If ID is provided, assign it to a variable.
     # If no ID is provided, display an error in the browser.
 #    print(groups)
-    group()
+    groups = group()
     group_dict = {"groups" : groups}
     return json.dumps(group_dict) 
 #    return jsonify(group_dict)

@@ -113,7 +113,7 @@ class _GroupScreenState extends State<GroupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("json lentgh ${jsonData.length}");
+    //print("json lentgh ${jsonData.length}");
     return Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
