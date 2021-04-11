@@ -43,7 +43,35 @@ class _GradingScreenState extends State<GradingScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        // appBar: AppBar(),
+        floatingActionButton: InkWell(
+            onTap: () {},
+            // => Navigator.of(context).push(MaterialPageRoute(
+            //     builder: (context) => GradingScreen(
+            //           json: this.jsonData,
+            //         ))),
+            child: Container(
+              width: 180,
+              height: 60,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  gradient: LinearGradient(
+                      colors: [Colors.red, Colors.orange],
+                      begin: Alignment.bottomLeft,
+                      end: Alignment.topRight)),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Icon(Icons.login, color: Colors.white),
+                    Text('Submit Grades',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white)),
+                  ],
+                ),
+              ),
+            )),
         body: Row(
           children: [
             Expanded(
@@ -51,6 +79,11 @@ class _GradingScreenState extends State<GradingScreen>
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      AppBar(
+                        elevation: 0,
+                        backgroundColor: green,
+                        title: Text('Assign Grades to Groups'),
+                      ),
                       TabBar(
                         controller: _tabController,
                         labelStyle: TextStyle(color: Colors.black87),
@@ -70,23 +103,36 @@ class _GradingScreenState extends State<GradingScreen>
                     ])),
             Expanded(
                 flex: 5,
-                child: Container(
-                  child: Scrollbar(
-                    child: TabBarView(
-                        controller: _tabController,
-                        physics: NeverScrollableScrollPhysics(),
-                        children: _summaries
-                            .map((summaries) => Container(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 32.0, horizontal: 16.0),
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [Wrap(children: summaries)]),
-                                )))
-                            .toList()),
-                  ),
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage('lib/assets/history.jpg'),
+                              fit: BoxFit.cover)),
+                    ),
+                    Container(color: Colors.black54),
+                    Container(
+                      child: Scrollbar(
+                        child: TabBarView(
+                            controller: _tabController,
+                            physics: NeverScrollableScrollPhysics(),
+                            children: _summaries
+                                .map((summaries) => Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 32.0, horizontal: 16.0),
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Wrap(children: summaries)
+                                          ]),
+                                    )))
+                                .toList()),
+                      ),
+                    ),
+                  ],
                 )),
           ],
         ));
