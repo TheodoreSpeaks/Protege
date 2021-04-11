@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import 'GradingScreen.dart';
 import 'SummarizationCard.dart';
 
-class GroupScreen extends StatelessWidget {
+class GroupScreen extends StatefulWidget {
   static const jsonData = [
     {
       'group_name': 'Group 1',
@@ -83,13 +86,39 @@ class GroupScreen extends StatelessWidget {
   ];
 
   @override
+  _GroupScreenState createState() => _GroupScreenState();
+}
+
+class _GroupScreenState extends State<GroupScreen> {
+  List<dynamic> jsonData = [];
+  void getJSON() async {
+    final response = await http.get(Uri.http('127.0.0.1:5000', 'get_groups'));
+    if (response.statusCode == 200) {
+      //jsonData = jsonDecode(response.body);
+      setState(() {
+        jsonData = jsonDecode(response.body)['groups'];
+        print("json $jsonData[0]");
+      });
+    } else {
+      throw Exception("Failed to load groups");
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getJSON();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(),
         floatingActionButton: FloatingActionButton.extended(
             onPressed: () => Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => GradingScreen(
-                      json: jsonData,
+                      json: this.jsonData,
                     ))),
             label: Text('Assign Grades'),
             icon: Icon(Icons.assignment)),
@@ -115,7 +144,8 @@ class GroupScreen extends StatelessWidget {
               SizedBox(height: 16.0),
               Expanded(
                 child: Row(
-                    children: jsonData.map((e) => GroupView(json: e)).toList()),
+                    children:
+                        this.jsonData.map((e) => GroupView(json: e)).toList()),
               )
             ],
           ),

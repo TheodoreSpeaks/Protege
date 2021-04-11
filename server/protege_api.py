@@ -16,7 +16,7 @@ convo_template = {'id': -1,
             }
 
 group_template = {'id': -1,
-          'convos': []
+          'group_entries': []
           }
 groups=[]
 convos =[] 
@@ -44,13 +44,17 @@ def group():
     for i in range(n_clusters):
         new_group = group_template.copy()
         new_group['id'] = i
+        new_group['group_name'] = "Group" + str(i)
         for j in range(len(convos)):
             if clusters[j] == new_group['id']:
-                res = next((sub for sub in convos if sub['id'] == j), None)
+                res = next((sub for sub in convos if sub['id'] == j), None).copy()
                 if res is None: 
                     continue
-                new_group['convos'].append(res)
+                res.pop('sig', None)
+                new_group['group_entries'].append(res)
+
         groups.append(new_group)
+    #print("group count:", len(groups))
     '''
     group_counter = 0
     for i in range(len(convos)):
@@ -98,7 +102,6 @@ def createConvo(convo):
     new_convo['name'] = names[new_convo['id']%len(names)]
     new_convo["sig"] = get_sig(new_convo['convo'])
     convos.append(new_convo)
-    group()
 #    print(new_convo)
     return 'convo added at ' + str(new_convo['id'])
 
@@ -131,14 +134,16 @@ def getGroups():
     # If ID is provided, assign it to a variable.
     # If no ID is provided, display an error in the browser.
 #    print(groups)
+    group()
     group_dict = {"groups" : groups}
-    return jsonify(group_dict)
+    return json.dumps(group_dict) 
+#    return jsonify(group_dict)
 #    print("json:", json[68930:68935]) 
 
 
 load_convos()
-print(convos)
-group()
+#print(convos)
+#group()
 
 
 if __name__ == '__main__':
