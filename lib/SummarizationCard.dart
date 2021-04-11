@@ -11,12 +11,18 @@ class SummarizationCard extends StatelessWidget {
     "AI: What is the Base Case?"
   ];
 
-  const SummarizationCard({
-    Key? key,
-  }) : super(key: key);
+  final dynamic json;
+  static const dynamic defaultJson = {
+    'name': 'Chuck Miller',
+    'summary':
+        'Induction is blah blah blah blah blah lorem ipsum you know the drill by now'
+  };
+
+  const SummarizationCard({Key? key, this.json: defaultJson}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print('json: $json');
     return InkWell(
       onTap: () {
         showDialog(
@@ -32,7 +38,7 @@ class SummarizationCard extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16.0)),
                       child: Column(children: [
                         AppBar(
-                            title: Text("Chuck Millers conversation"),
+                            title: Text("${json['name']}'s conversation"),
                             leading: IconButton(
                               icon: Icon(Icons.close),
                               onPressed: () => Navigator.of(context).pop(),
@@ -55,16 +61,14 @@ class SummarizationCard extends StatelessWidget {
             });
       },
       child: Container(
-        width: double.infinity,
+        width: 300,
         padding: const EdgeInsets.all(16.0),
         margin: const EdgeInsets.only(bottom: 8.0),
         decoration: BoxDecoration(
             color: Colors.white, borderRadius: BorderRadius.circular(8.0)),
         child: Column(
           children: [
-            Text(
-                'Induction is blah blah blah blah blah lorem ipsum you know the drill by now',
-                style: TextStyle(fontSize: 18)),
+            Text(json['summary'], style: TextStyle(fontSize: 18)),
             SizedBox(height: 16),
             Row(
               children: [
@@ -72,7 +76,7 @@ class SummarizationCard extends StatelessWidget {
                   backgroundColor: Colors.blue,
                 ),
                 SizedBox(width: 8),
-                Text('Chuck Miller'),
+                Text(json['name']),
               ],
             )
           ],

@@ -15,23 +15,25 @@ class _MainPageState extends State<MainPage> {
     StudentAssignmentPreview(),
   ];
   List<Widget> teacherAssignmentsUnfinished = [
-    TeacherAssignmentPreview(),
-    TeacherAssignmentPreview(),
-    TeacherAssignmentPreview(),
-    TeacherAssignmentPreview(),
-    TeacherAssignmentPreview(),
+    TeacherAssignmentPreview(
+      assignmentName: 'The Race for Space: A Look into the Cold War',
+    ),
   ];
   List<Widget> studentAssignmentsFinished = [
     StudentAssignmentPreview(),
     StudentAssignmentPreview(),
   ];
   List<Widget> teacherAssignmentsFinished = [
-    TeacherAssignmentPreview(),
-    TeacherAssignmentPreview(),
-    TeacherAssignmentPreview(),
-    TeacherAssignmentPreview(),
-    TeacherAssignmentPreview(),
-    TeacherAssignmentPreview(),
+    TeacherAssignmentPreview(
+        assignmentName: 'World War II: The Pacific Theatre'),
+    TeacherAssignmentPreview(assignmentName: 'Analyzing Europe pre-WWI'),
+    TeacherAssignmentPreview(assignmentName: 'A House Divided: The Civil War'),
+    TeacherAssignmentPreview(
+        assignmentName:
+            'Manifest Destiny: Glorious Undertaking or Ruthless Colonialism?'),
+    TeacherAssignmentPreview(
+        assignmentName:
+            'To Form a More Perfect Union: The Creation of the Constitution'),
   ];
 
   @override
@@ -101,9 +103,12 @@ class _MainPageState extends State<MainPage> {
                       Expanded(
                         child: ListView(
                           children: [
-                            ClassSelector(),
-                            ClassSelector(),
-                            ClassSelector(),
+                            ClassSelector(
+                                name: "Mr. Wilson's 8th Grade History Class"),
+                            ClassSelector(
+                                name: "Mr. Runkle's 8th Grade English Class"),
+                            ClassSelector(
+                                name: "Mr. Mattsey's 8th Grade Jazz Class"),
                           ],
                         ),
                       ),
@@ -163,8 +168,17 @@ class _MainPageState extends State<MainPage> {
 }
 
 class TeacherAssignmentPreview extends StatelessWidget {
+  final String assignmentName;
+  final String completion;
+  final String dueDate;
+  final String lateCompletion;
+
   const TeacherAssignmentPreview({
     Key? key,
+    this.assignmentName: 'Assignment 3: Induction',
+    this.completion: '20/30',
+    this.dueDate: 'Monday, April 12',
+    this.lateCompletion: '5/30',
   }) : super(key: key);
 
   @override
@@ -185,7 +199,7 @@ class TeacherAssignmentPreview extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Assignment 3: Induction',
+                assignmentName,
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -193,7 +207,7 @@ class TeacherAssignmentPreview extends StatelessWidget {
               ),
               Spacer(),
               Divider(),
-              Row(children: [Text('20/30'), Icon(Icons.person)]),
+              Row(children: [Text(completion), Icon(Icons.person)]),
             ],
           )),
     );
@@ -237,6 +251,10 @@ class StudentAssignmentPreview extends StatelessWidget {
 }
 
 class ClassSelector extends StatelessWidget {
+  final String name;
+
+  const ClassSelector({Key? key, required this.name}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -252,7 +270,7 @@ class ClassSelector extends StatelessWidget {
           SizedBox(width: 16.0),
           Flexible(
             child: Text(
-              "Mrs. Potter's 7th grade math class",
+              name,
               style: TextStyle(fontSize: 18),
             ),
           ),

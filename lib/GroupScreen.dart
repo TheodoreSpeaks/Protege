@@ -1,14 +1,96 @@
 import 'package:flutter/material.dart';
 
+import 'GradingScreen.dart';
 import 'SummarizationCard.dart';
 
 class GroupScreen extends StatelessWidget {
+  static const jsonData = [
+    {
+      'group_name': 'Group 1',
+      'group_entries': [
+        {
+          'name': 'Chuck Miller',
+          'summary':
+              'Induction is blah blah blah blah blah lorem ipsum you know the drill by now'
+        },
+        {
+          'name': 'Chuck Miller',
+          'summary':
+              'Induction is blah blah blah blah blah lorem ipsum you know the drill by now'
+        },
+        {
+          'name': 'Chuck Miller',
+          'summary':
+              'Induction is blah blah blah blah blah lorem ipsum you know the drill by now'
+        },
+        {
+          'name': 'Chuck Miller',
+          'summary':
+              'Induction is blah blah blah blah blah lorem ipsum you know the drill by now'
+        },
+      ]
+    },
+    {
+      'group_name': 'Group 2',
+      'group_entries': [
+        {
+          'name': 'Chuck Miller',
+          'summary':
+              'Induction is blah blah blah blah blah lorem ipsum you know the drill by now'
+        },
+        {
+          'name': 'Chuck Miller',
+          'summary':
+              'Induction is blah blah blah blah blah lorem ipsum you know the drill by now'
+        },
+        {
+          'name': 'Chuck Miller',
+          'summary':
+              'Induction is blah blah blah blah blah lorem ipsum you know the drill by now'
+        },
+        {
+          'name': 'Chuck Miller',
+          'summary':
+              'Induction is blah blah blah blah blah lorem ipsum you know the drill by now'
+        },
+      ]
+    },
+    {
+      'group_name': 'Group 3',
+      'group_entries': [
+        {
+          'name': 'Chuck Miller',
+          'summary':
+              'Induction is blah blah blah blah blah lorem ipsum you know the drill by now'
+        },
+        {
+          'name': 'Chuck Miller',
+          'summary':
+              'Induction is blah blah blah blah blah lorem ipsum you know the drill by now'
+        },
+        {
+          'name': 'Chuck Miller',
+          'summary':
+              'Induction is blah blah blah blah blah lorem ipsum you know the drill by now'
+        },
+        {
+          'name': 'Chuck Miller',
+          'summary':
+              'Induction is blah blah blah blah blah lorem ipsum you know the drill by now'
+        },
+      ]
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(),
         floatingActionButton: FloatingActionButton.extended(
-            onPressed: () {},
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => GradingScreen(
+                      json: jsonData,
+                    ))),
             label: Text('Assign Grades'),
             icon: Icon(Icons.assignment)),
         body: Container(
@@ -32,11 +114,8 @@ class GroupScreen extends StatelessWidget {
               ),
               SizedBox(height: 16.0),
               Expanded(
-                child: Row(children: [
-                  GroupView(),
-                  GroupView(),
-                  GroupView(),
-                ]),
+                child: Row(
+                    children: jsonData.map((e) => GroupView(json: e)).toList()),
               )
             ],
           ),
@@ -45,8 +124,10 @@ class GroupScreen extends StatelessWidget {
 }
 
 class GroupView extends StatelessWidget {
+  final dynamic json;
   const GroupView({
     Key? key,
+    required this.json,
   }) : super(key: key);
 
   @override
@@ -54,29 +135,23 @@ class GroupView extends StatelessWidget {
     return Container(
         width: 350,
         decoration: BoxDecoration(
-            color: Colors.grey[300],
-            borderRadius: BorderRadius.circular(8.0)),
+            color: Colors.grey[300], borderRadius: BorderRadius.circular(8.0)),
         padding: const EdgeInsets.all(16.0),
         margin: const EdgeInsets.only(right: 16.0),
         child: Scrollbar(
-                  child: Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Group 1',
+              Text(json['group_name'],
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
               SizedBox(height: 8.0),
               Expanded(
-                child: ListView(
-                  children: [
-                    SummarizationCard(),
-                    SummarizationCard(),
-                    SummarizationCard(),
-                    SummarizationCard(),
-                    SummarizationCard(),
-                    SummarizationCard(),
-                  ],
-                ),
-              ),
+                  child: ListView.builder(
+                itemCount: json['group_entries'].length,
+                itemBuilder: (context, index) {
+                  return SummarizationCard(json: json['group_entries'][index]);
+                },
+              )),
             ],
           ),
         ));
